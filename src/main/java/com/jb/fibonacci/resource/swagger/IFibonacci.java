@@ -1,8 +1,9 @@
 package com.jb.fibonacci.resource.swagger;
 
-import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+
+import com.jb.fibonacci.DTO.FibonacciGeradoDTO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
@@ -11,7 +12,7 @@ import io.swagger.annotations.ApiResponse;
 public interface IFibonacci {
 	
 	@ApiResponse(code = 200, message = "Fibonnaci gerado com sucesso!")
-	ResponseEntity<List<Integer>> gerarFibonacci(Integer n);
+	ResponseEntity<FibonacciGeradoDTO> gerarFibonacci(Integer n);
 
 
 }

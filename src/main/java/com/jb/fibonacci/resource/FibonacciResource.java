@@ -1,7 +1,5 @@
 package com.jb.fibonacci.resource;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jb.fibonacci.DTO.FibonacciGeradoDTO;
 import com.jb.fibonacci.resource.swagger.IFibonacci;
 import com.jb.fibonacci.service.FibonacciService;
 
@@ -22,7 +21,7 @@ public class FibonacciResource implements IFibonacci {
 	
 	@GetMapping("{n}")
 	@Cacheable(value = "fibonacci")
-	public ResponseEntity<List<Integer>> gerarFibonacci(@PathVariable Integer n) {
+	public ResponseEntity<FibonacciGeradoDTO> gerarFibonacci(@PathVariable Integer n) {
 		return ResponseEntity.ok(fibonacciService.gerarFibonacci(n));
 	}
 

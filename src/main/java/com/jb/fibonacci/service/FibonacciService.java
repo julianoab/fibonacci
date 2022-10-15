@@ -2,26 +2,38 @@ package com.jb.fibonacci.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.websocket.server.ServerEndpoint;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.jb.fibonacci.DTO.FibonacciGeradoDTO;
+import com.jb.fibonacci.mapper.FibonacciMapper;
+import com.jb.fibonacci.model.FibonacciGerado;
+import com.jb.fibonacci.service.exception.ValorInferiorException;
 
 @Service
 public class FibonacciService {
-	
-	public List<Integer> gerarFibonacci(Integer number) {
-		System.out.println("passou aqui");
-		List<Integer> lista = new ArrayList<Integer>();
-		Integer[] fibonacci = new Integer[number];
-		fibonacci[0] = 0;
-		fibonacci[1] = 1;
-		
-		for (int i = 2; i < number; i++) {
-			 fibonacci[i] = fibonacci[i - 2] + fibonacci[i - 1];
-			  lista.add(fibonacci[i]);
-			}
-		return lista;
+
+	@Autowired
+	FibonacciMapper mapper;
+
+	public FibonacciGeradoDTO gerarFibonacci(Integer number) {
+		FibonacciGerado fg = new FibonacciGerado();
+		List<Integer> fibonacci = new ArrayList<Integer>();
+
+		fg.setNumero(number);
+
+		if (number <= 1) {
+			throw new ValorInferiorException("Número informado deve ser maior que 1");
+		}
+
+		fibonacci.add(0);
+		fibonacci.add(1);
+
+		for (int i = 2; i <= number; i++) {
+			fibonacci.add(fibonacci.get(i - 2) + fibonacci.get(i - 1));
+		}
+
+		fg.setSequencia(fibonacci);
+		return mapper.toDTO(fg);
 	}
 
 }
