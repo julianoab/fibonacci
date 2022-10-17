@@ -6,6 +6,7 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -23,7 +24,8 @@ public class SwaggerConfiguracao {
 
 	ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Fibonacci")
-				.description("Geração de ficonacci a partir do valor informado")
+				.description("Geração de ficonacci a partir do número informado")
+				.contact(new Contact("Juliano Bispo", "https://github.com/julianoab", "julianoasud@hotmail.com"))
 				.version("V1").build();
 	}
 
